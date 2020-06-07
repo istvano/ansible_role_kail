@@ -1,0 +1,16 @@
+---
+# kail_ version number
+kail_version: '0.15.0'
+
+# SHA256 sum for the redistributable kail_ package (i.e. kail_-linux-amd64.tar.gz)
+kail_redistribution_sha256sum: 'e37862bf4547329a3299aece4ae62bc7d3a277cafeadc81304c262a016816ce2'
+
+# Mirror to download the kail_ from
+kail_mirror: 'https://github.com/boz/kail/releases/download/v{{ kail_version }}'
+
+# Directory to store files downloaded for kail
+kail_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
+
+kail_excluded_files:
+  - README.md
+  - LICENSE.txt

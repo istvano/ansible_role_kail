@@ -1,0 +1,55 @@
+---
+- name: create download directory for kail installation
+  file:
+    state: directory
+    mode: 'u=rwx,go=rx'
+    dest: '{{ kail_download_dir }}'
+
+- name: download kail
+  get_url:
+    url: '{{ kail_mirror }}/{{ kail_redistribution_filename }}'
+    dest: '{{ kail_download_dir }}/{{ kail_download_filename }}'
+    sha256sum: '{{ kail_redistribution_sha256sum }}'
+    force: no
+    use_proxy: yes
+    validate_certs: yes
+    mode: 'u=rw,go=r'
+
+- name: create the kail staging dir
+  file:
+    state: directory
+    mode: 'u=rwx,go=rx'
+    dest: '{{ kail_staging_dir }}'
+
+- name: install unarchive module dependencies (apt, yum, dnf, zypper)
+  become: yes
+  package:
+    name:
+      - tar
+      - unzip
+    state: present
+  when: ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')
+
+- name: extract kail
+  unarchive:
+    remote_src: yes
+    src: '{{ kail_download_dir }}/{{ kail_download_filename }}'
+    dest: '{{ kail_staging_dir }}'
+    exclude: '{{ kail_excluded_files }}'
+    creates: '{{ kail_staging_dir }}/{{ kail_redistribution_executable_filename }}'
+
+- name: create the kail installation dir
+  become: yes
+  file:
+    state: directory
+    dest: '{{ kail_install_dir }}'
+
+- name: install kail
+  become: yes
+  copy:
+    src: '{{ kail_staging_dir }}/{{ kail_redistribution_executable_filename }}'
+    remote_src: yes
+    dest: '{{ kail_install_dir }}/kail'
+    owner: root
+    group: root
+    mode: 'u=rwx,go=rx'

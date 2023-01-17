@@ -4,7 +4,7 @@ kail_os: 'linux'
 kail_architecture: amd64
 
 # https://github.com/boz/kail/releases/download/v0.15.0/kail_0.15.0_linux_amd64.tar.gz
-kail_redistribution_filename: 'kail_{{ kail_version }}_{{ kail_os }}_{{ kail_architecture }}.tar.gz'
+kail_redistribution_filename: 'kail_v{{ kail_version }}_{{ kail_os }}_{{ kail_architecture }}.tar.gz'
 
 # File name of the kail download file
 kail_download_filename: 'kail-v{{ kail_version }}-{{ kail_os }}-{{ kail_architecture }}.tar.gz'

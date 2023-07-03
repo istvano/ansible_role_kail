@@ -9,7 +9,7 @@
   get_url:
     url: '{{ kail_mirror }}/{{ kail_redistribution_filename }}'
     dest: '{{ kail_download_dir }}/{{ kail_download_filename }}'
-    sha256sum: '{{ kail_redistribution_sha256sum }}'
+    checksum: 'sha256:{{ kail_redistribution_sha256sum }}'
     force: no
     use_proxy: yes
     validate_certs: yes
@@ -37,11 +37,13 @@
     dest: '{{ kail_staging_dir }}'
     exclude: '{{ kail_excluded_files }}'
     creates: '{{ kail_staging_dir }}/{{ kail_redistribution_executable_filename }}'
+    mode: 'u=rwx,go=rx'
 
 - name: create the kail installation dir
   become: yes
   file:
     state: directory
+    mode: 'u=rwx,go=rx'
     dest: '{{ kail_install_dir }}'
 
 - name: install kail

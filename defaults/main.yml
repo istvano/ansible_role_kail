@@ -1,9 +1,9 @@
 ---
 # kail_ version number
-kail_version: '0.15.0'
+kail_version: '0.16.1'
 
 # SHA256 sum for the redistributable kail_ package (i.e. kail_-linux-amd64.tar.gz)
-kail_redistribution_sha256sum: 'e37862bf4547329a3299aece4ae62bc7d3a277cafeadc81304c262a016816ce2'
+kail_redistribution_sha256sum: 'ae353d41ba3af01a4f403aa9175d942e7b5f4976dbaa2cd2beb051e4b32f15ab'
 
 # Mirror to download the kail_ from
 kail_mirror: 'https://github.com/boz/kail/releases/download/v{{ kail_version }}'

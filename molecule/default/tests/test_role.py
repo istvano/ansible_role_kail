@@ -25,5 +25,5 @@ def test_file(host):
 
 def test_version(host):
     version = host.check_output('kail version')
-    pattern = '^[0-9\\.]+'
+    pattern = '^v[0-9\\.]+'
     assert re.search(pattern, version)
